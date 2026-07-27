@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  aegis-cli:
+    build: .
+    container_name: aegis_audit_cli
+    network_mode: host
+    volumes:
+      - ./reports:/app/reports
+    entrypoint: ["tail", "-f", "/dev/null"]
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama_service
+    network_mode: host
+    volumes:
+      - ollama_data:/root/.ollama
+
+volumes:
+  ollama_data:
